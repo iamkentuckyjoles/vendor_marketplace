@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from src.models.vendor import VendorApplication
-from src.models.location import Region, Province, Municipality, Barangay
+from .models import VendorApplication
+from src.location.models import Region, Province, Municipality, Barangay
 
 class VendorApplicationSerializer(serializers.ModelSerializer):
+    # Override FK fields to use names instead of IDs
     region = serializers.SlugRelatedField(
         slug_field="name",
         queryset=Region.objects.all()
@@ -22,15 +23,16 @@ class VendorApplicationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = VendorApplication
-        fields = [
-            "id", "owner_name", "store_name",
-            "region", "province", "municipality", "barangay",
-            "contact_number", "business_permit", "google_maps_link",
-            "status", "rejection_reason",
-            "submitted_at", "approved_at", "approved_by"
+        fields = "__all__"
+        read_only_fields = [
+            "status",
+            "submitted_at",
+            "approved_at",
+            "approved_by",
+            "rejection_reason",
         ]
-        read_only_fields = ["submitted_at", "approved_at", "approved_by"]
 
+    # ✅ Cascading validation
     def validate(self, data):
         region = data.get("region")
         province = data.get("province")

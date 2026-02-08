@@ -1,7 +1,7 @@
 from rest_framework import generics
 from .models import VendorApplication
 from .serializers import VendorApplicationSerializer
-from src.api.v1.permissions import IsNewUser
+from src.api.v1.services.permissions import IsNewUser
 
 class VendorApplicationCreateView(generics.CreateAPIView):
     queryset = VendorApplication.objects.all()

@@ -26,9 +26,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "src.users",
-    "src.vendors",
     "rest_framework_simplejwt.token_blacklist",
+
+    "src.user",
+    "src.vendor",
+    "src.custom_admin",
+    "src.verifier",
+    "src.location",
     
 ]
 
@@ -48,7 +52,7 @@ WSGI_APPLICATION = "src.vendor_marketplace.wsgi.application"
 DATABASES = DATABASES
 LOGGING = LOGGING
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "user.User"
 
 TEMPLATES = [
     {
@@ -103,3 +107,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"    # where collectstatic will put files
 # Media files (uploads)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
