@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from src.api.v1.permissions import IsAdmin
+from src.api.v1.services.permissions import IsAdmin
 from src.api.v1.schemas.user_schema import VerifierCreateSerializer
 
 from src.models.vendor import VendorApplication
